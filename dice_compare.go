@@ -16,7 +16,7 @@ func CompareList(str string, strList []string) (string, float64) {
 	// max coefficient from the list
 	maxCoeff := 0.0
 	for idx, s := range strList {
-		coeff := Compare(str, s)
+		coeff := Compare(s, str)
 		if coeff > maxCoeff {
 			maxCoeff = coeff
 			maxIdx = idx
