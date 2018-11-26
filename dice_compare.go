@@ -32,11 +32,14 @@ func CompareList(str string, strList []string) (string, float64) {
 func Compare(aStr, bStr string) float64 {
 	aStr = strings.ToLower(aStr)
 	bStr = strings.ToLower(bStr)
+	if len(aStr) < 2 {
+		return 0
+	}
 	if aStr == bStr {
 		return 1
 	}
-	aBigram := SplitBigramMultiple(aStr)
-	bBigram := SplitBigramMultiple(bStr)
+	aBigram := SplitBigram(aStr)
+	bBigram := SplitBigram(bStr)
 	intersection := 0
 	for aKey := range aBigram {
 		if bBigram[aKey] == true {
@@ -46,23 +49,11 @@ func Compare(aStr, bStr string) float64 {
 	return float64(intersection) * 2 / float64(len(bStr)+len(aStr))
 }
 
-// SplitBigramMultiple split the word into set of bigrams and can accept words with whitespace
-func SplitBigramMultiple(str string) map[DiceBigram]bool {
-	bigramMap := make(map[DiceBigram]bool)
-	wordList := strings.Fields(str)
-
-	for _, word := range wordList {
-		for bigramKey := range SplitBigram(word) {
-			bigramMap[bigramKey] = true
-		}
-	}
-
-	return bigramMap
-}
-
 // SplitBigram split the word into set of bigrams
 func SplitBigram(str string) map[DiceBigram]bool {
 	var last rune
+	wordList := strings.Fields(str)
+	str = strings.Join(wordList, " ")
 	bigramMap := make(map[DiceBigram]bool)
 	for idx, ch := range str {
 		if idx > 0 {
