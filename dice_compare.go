@@ -43,7 +43,7 @@ func Compare(aStr, bStr string) float64 {
 			intersection++
 		}
 	}
-	return float64(intersection) * 2 / float64(len(bStr)+len(aStr)
+	return float64(intersection) * 2 / float64(len(bStr)+len(aStr))
 }
 
 // SplitBigramMultiple split the word into set of bigrams and can accept words with whitespace
